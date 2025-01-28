@@ -1,30 +1,33 @@
 package main
 
 import (
-	"flag"
-	"fmt"
 	"os"
+	"text/template"
 )
 
+type Pets struct {
+	Name   string
+	Age    int
+	Sex    string
+	Breed  string
+	Intact bool
+}
+
 func main() {
-	var username string
-	flag.StringVar(&username, "username", "", "input your username")
-
-	flag.Usage = func() {
-		_, err := fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n", os.Args[0])
-		if err != nil {
-			return
-		}
-		fmt.Println("  -username string\n    input your username (required)")
+	dogs := []Pets{
+		{"Bella", 3, "F", "Poodle", false},
+		{"Max", 2, "M", "Golden Retriever", true},
+		{"Lucy", 4, "F", "Labrador", false},
 	}
 
-	// Parse the flags
-	flag.Parse()
-
-	if username == "" {
-		flag.Usage()
-		os.Exit(1)
+	var tmplFile = "./views/pets.tmpl"
+	tmpl, err := template.ParseFiles(tmplFile)
+	if err != nil {
+		panic(err)
 	}
 
-	fmt.Println("Username:", username)
+	err = tmpl.Execute(os.Stdout, dogs)
+	if err != nil {
+		panic(err)
+	}
 }
