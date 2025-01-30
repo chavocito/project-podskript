@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module github.com/chavocito/podskript
 
 go 1.21.6
@@ -37,3 +38,8 @@ require (
 	gorm.io/driver/postgres v1.5.11 // indirect
 	gorm.io/gorm v1.25.12 // indirect
 )
+=======
+module github.com/chavocito/project-podscript
+
+go 1.21.6
+>>>>>>> 91a02037ce6cdd0304db05bd9e7a28bfc0cf573e
